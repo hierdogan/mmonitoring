@@ -83,7 +83,7 @@ def download_excel(df):
     return output.getvalue()
 
 
-st.title("Excel/CSV Veri Manipülasyonu Uygulaması")
+st.title("Excel/CSV Veri Hazırlama Uygulaması")
 
 uploaded_file = st.file_uploader("Bir Excel veya CSV dosyası yükleyin", type=['csv', 'xlsx'])
 

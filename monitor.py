@@ -71,7 +71,11 @@ if app_mode == 'Welcome':
 
         # Define target courses and filter.
 
-        selected_courses = ["SQL for Data Analytics", "Excel for Data Analytics with CRM Metrics"]
+        selected_courses = ["SQL for Data Analytics",
+                            "Excel for Data Analytics with CRM Metrics",
+                            "Power BI for Data Analytics",
+                            "Python for Data Analytics",
+                            "Machine Learning for Data Analytics"]
 
         # selected_courses = ["Welcome to Data Analytics Bootcamp Mindset",
         #                     "Data Analysis with Python",
@@ -86,20 +90,19 @@ if app_mode == 'Welcome':
         df1 = filtered_df.copy()
         # df.sort_values("Full_Name")
 
-        df2 = pd.DataFrame({"Ad-Soyad": df1["Full_Name"].tolist(),
-                            "Modül": df1["Course Name"].tolist(),
-                            "İzlenme Oranı": df1["% Completed"].tolist()
-                             })
+        df2 = df1.pivot_table(index="Full_Name",
+                              columns="Course Name",
+                              values="% Completed").reset_index()
+        desired_columns = ["Full_Name",
+                           "Excel for Data Analytics with CRM Metrics",
+                           "SQL for Data Analytics",
+                           "Power BI for Data Analytics",
+                           "Python for Data Analytics",
+                           "Machine Learning for Data Analytics"]
+
+        df2 = df2[desired_columns]
 
         return df1, df2
-
-    # TODO : İlk excel export fonksiyonu
-    # def download_excel(df):
-    #     output = BytesIO()
-    #     with pd.ExcelWriter(output, engine='openpyxl') as writer:
-    #         df.to_excel(writer, index=False)
-    #     return output.getvalue()
-
 
     def download_excel(df1, df2):
         output = BytesIO()
